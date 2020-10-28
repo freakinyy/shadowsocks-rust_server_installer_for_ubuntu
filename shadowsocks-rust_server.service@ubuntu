@@ -23,7 +23,7 @@ do_start(){
 		until [ "$i" -eq "$process_num" ]
 		do
 			pre_name=$(echo $json_file | sed "s/\.json//g")
-			nohup ssserver -c /etc/shadowsocks-rust_server/$json_file  > /dev/null 2>&1 &
+			nohup ssserver -c /etc/shadowsocks-rust_server/$json_file > /dev/null 2>&1 &
 			echo $! > /var/run/shadowsocks-rust_server/$pre_name-$i.pid
 			i=$(($i+1))
 		done
