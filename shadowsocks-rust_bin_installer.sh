@@ -50,7 +50,7 @@ install_shadowsocks_rust(){
     if [ "$need_update" == "1" ];then
         local tmp_dir=`mktemp -d /tmp/shadowsocks-rust_bin.XXXXXX`
         cd $tmp_dir
-        wget https://github.com/shadowsocks/shadowsocks-rust/releases/download/v"$version_new"/shadowsocks-v"$version_new"."$arch_shadowsocks_rust"-unknown-"$kernel_shadowsocks_rust"-"$system_shadowsocks_rust".tar.xz > /dev/null 2>&1
+        wget https://github.com/shadowsocks/shadowsocks-rust/releases/download/v"$version_new"/shadowsocks-v"$version_new"."$arch_shadowsocks_rust"-unknown-"$kernel_shadowsocks_rust"-"$system_shadowsocks_rust".tar.xz -O shadowsocks-v"$version_new"."$arch_shadowsocks_rust"-unknown-"$kernel_shadowsocks_rust"-"$system_shadowsocks_rust".tar.xz > /dev/null 2>&1
         tar xvf shadowsocks-v"$version_new"."$arch_shadowsocks_rust"-unknown-"$kernel_shadowsocks_rust"-"$system_shadowsocks_rust".tar.xz > /dev/null 2>&1
         service shadowsocks-rust_transproxy stop > /dev/null 2>&1
         service shadowsocks-rust_server stop > /dev/null 2>&1
@@ -81,7 +81,7 @@ install_v2ray_plugin(){
     if [ "$need_update" == "1" ];then
         local tmp_dir=`mktemp -d /tmp/v2ray-plugin_bin.XXXXXX`
         cd $tmp_dir
-        wget https://github.com/shadowsocks/v2ray-plugin/releases/download/v"$version_new"/v2ray-plugin-"$kernel_v2ray_plugin"-"$arch_v2ray_plugin"-v"$version_new".tar.gz > /dev/null 2>&1
+        wget https://github.com/shadowsocks/v2ray-plugin/releases/download/v"$version_new"/v2ray-plugin-"$kernel_v2ray_plugin"-"$arch_v2ray_plugin"-v"$version_new".tar.gz -O v2ray-plugin-"$kernel_v2ray_plugin"-"$arch_v2ray_plugin"-v"$version_new".tar.gz > /dev/null 2>&1
         tar xvf v2ray-plugin-"$kernel_v2ray_plugin"-"$arch_v2ray_plugin"-v"$version_new".tar.gz > /dev/null 2>&1
         service shadowsocks-rust_transproxy stop > /dev/null 2>&1
         service shadowsocks-rust_server stop > /dev/null 2>&1
