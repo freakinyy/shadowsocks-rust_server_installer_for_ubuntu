@@ -1,0 +1,60 @@
+#!/bin/sh
+# Start/stop the Shadowsocks-rust server.
+#
+### BEGIN INIT INFO
+# Provides:				Shadowsocks-rust
+# Required-Start:		$network $local_fs $remote_fs
+# Required-Stop:		$network $local_fs $remote_fs
+# Default-Start:		2 3 4 5
+# Default-Stop:			0 1 6
+# Short-Description:	Fast tunnel proxy that helps you bypass firewalls
+# Description:			Start or stop the Shadowsocks-rust server
+### END INIT INFO
+
+do_start(){
+	[ -d /etc/shadowsocks-rust_server/ ] || return 2
+	json_files=$(ls /etc/shadowsocks-rust_server/ | grep ".json$" )
+	[ -d /var/run/shadowsocks-rust_server/ ] && do_stop
+	mkdir -p /var/run/shadowsocks-rust_server/
+	#ulimit -n 51200
+	process_num=1
+	for json_file in $json_files; do
+		i=0
+		until [ "$i" -eq "$process_num" ]
+		do
+			pre_name=$(echo $json_file | sed "s/\.json//g")
+			nohup ssserver -c /etc/shadowsocks-rust_server/$json_file  > /dev/null 2>&1 &
+			echo $! > /var/run/shadowsocks-rust_server/$pre_name-$i.pid
+			i=$(($i+1))
+		done
+	done
+}
+
+do_stop(){
+	[ -d /var/run/shadowsocks-rust_server/ ] || return 2
+	pid_files=$(ls /var/run/shadowsocks-rust_server/ | grep ".pid" )
+	[ -z "$pid_files" ] && return 2
+	for pid_file in $pid_files; do
+		pid=$(cat /var/run/shadowsocks-rust_server/$pid_file)
+		kill $pid
+	done
+	rm -rf /var/run/shadowsocks-rust_server/
+}
+
+case "$1" in
+start)
+		do_start
+		;;
+stop)
+		do_stop
+		;;
+restart)
+		do_stop
+		do_start
+		;;
+*)
+		echo "Usage: start|stop|restart|status"
+		exit 2
+		;;
+esac
+exit 0
