@@ -167,7 +167,8 @@ Create_Json(){
 	"plugin":"/usr/bin/v2ray-plugin",
 	"plugin_opts":"server;host=cloudflare.com",
 	"fast_open":true,
-	"mode":"tcp_and_udp"
+	"mode":"tcp_and_udp",
+    "nofile": 51200
 }
 EOF
 	echo "Create json path and file Done."
