@@ -168,7 +168,7 @@ Create_Json(){
 	"plugin_opts":"server;host=cloudflare.com",
 	"fast_open":true,
 	"mode":"tcp_and_udp",
-    "nofile": 51200
+	"nofile": 51200
 }
 EOF
 	echo "Create json path and file Done."
