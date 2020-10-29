@@ -12,7 +12,7 @@
 ### END INIT INFO
 
 conf_folder="/etc/shadowsocks-rust_server"
-pid_folder="/var/run/shadowsocks-libev_server"
+pid_folder="/var/run/shadowsocks-rust_server"
 
 do_start() {
 	[ -d $conf_folder/ ] || return 2
