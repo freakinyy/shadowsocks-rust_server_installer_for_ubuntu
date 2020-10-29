@@ -1,20 +1,12 @@
-#!/bin/sh
-# Start/stop the Shadowsocks-rust server.
-#
-### BEGIN INIT INFO
-# Provides:				Shadowsocks-rust
-# Required-Start:		$network $local_fs $remote_fs
-# Required-Stop:		$network $local_fs $remote_fs
-# Default-Start:		2 3 4 5
-# Default-Stop:			0 1 6
-# Short-Description:	Fast tunnel proxy that helps you bypass firewalls
-# Description:			Start or stop the Shadowsocks-rust server
-### END INIT INFO
+#!/bin/sh /etc/rc.common
+START=95
 
 conf_folder="/etc/shadowsocks-rust_server"
 pid_folder="/var/run/shadowsocks-libev_server"
+log_file="/var/log/shadowsocks-libev_server.log"
 
 do_start() {
+	echo "开启ss-server进程..."  >> $log_file
 	[ -d $conf_folder/ ] || return 2
 	json_files=$(ls $conf_folder/ | grep ".json$" )
 	[ -d $pid_folder/ ] && do_stop
@@ -29,6 +21,7 @@ do_start() {
 }
 
 do_stop() {
+	echo "关闭ss-server进程..."  >> $log_file
 	[ -d $pid_folder/ ] || return 2
 	pid_files=$(ls $pid_folder/ | grep ".pid" )
 	[ -z "$pid_files" ] && return 2
@@ -39,20 +32,18 @@ do_stop() {
 	rm -rf $pid_folder/
 }
 
-case "$1" in
-start)
-		do_start
-		;;
-stop)
-		do_stop
-		;;
-restart)
-		do_stop
-		do_start
-		;;
-*)
-		echo "Usage: start|stop|restart|status"
-		exit 2
-		;;
-esac
-exit 0
+start() {
+	rm -f $log_file
+	do_start
+}
+
+stop() {
+	rm -f $log_file
+	do_stop
+}
+
+restart() {
+	rm -f $log_file
+	do_stop
+	do_start
+}
