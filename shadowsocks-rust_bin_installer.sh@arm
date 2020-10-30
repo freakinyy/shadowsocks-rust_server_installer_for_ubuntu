@@ -108,12 +108,19 @@ uninstall(){
     done
 }
 
+update(){
+    install_shadowsocks_rust
+    install_v2ray_plugin
+}
+
 case "$1" in
 install)			install
 					;;
 uninstall)			uninstall
 					;;
-*)					echo "Usage: install|uninstall"
+update)			    update
+					;;
+*)					echo "Usage: install|uninstall|update"
 					exit 2
 					;;
 esac
