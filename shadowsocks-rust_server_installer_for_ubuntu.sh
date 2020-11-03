@@ -230,7 +230,7 @@ Add_to_Crontab(){
 	cat >> $TMP_DIR/crontab.bak <<EOF
 #shadowsocks-rust_server modifies start
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
-30 04 * * * apt update && apt upgrade -y && apt dist-upgrade -y && apt autoremove -y && apt autoclean
+20 04 * * * apt update && apt upgrade -y && apt dist-upgrade -y && apt autoremove -y && apt autoclean
 40 04 * * * [ -f /var/run/reboot-required ] && reboot
 50 04 * * * shadowsocks-rust_bin_installer.sh update
 #shadowsocks-rust_server modifies end
