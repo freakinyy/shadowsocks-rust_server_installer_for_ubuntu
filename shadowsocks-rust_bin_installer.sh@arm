@@ -2,7 +2,7 @@
 
 arch_shadowsocks_rust="arm"
 kernel_shadowsocks_rust="linux"
-system_shadowsocks_rust="musleabi"
+system_shadowsocks_rust="musleabihf"
 
 arch_v2ray_plugin="arm"
 kernel_v2ray_plugin="linux"
