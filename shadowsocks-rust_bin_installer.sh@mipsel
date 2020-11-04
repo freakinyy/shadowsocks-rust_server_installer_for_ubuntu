@@ -88,9 +88,9 @@ install_v2ray_plugin(){
         tar xvf v2ray-plugin-"$kernel_v2ray_plugin"-"$arch_v2ray_plugin"-v"$version_new".tar.gz
         service shadowsocks-rust_transproxy stop > /dev/null 2>&1
         service shadowsocks-rust_server stop > /dev/null 2>&1
-        local version_new_bin=$(get_version_from_bin "./v2ray-plugin_$kernel_v2ray_plugin_$arch_v2ray_plugin")
+        local version_new_bin=$(get_version_from_bin "./v2ray-plugin_"$kernel_v2ray_plugin"_"$arch_v2ray_plugin"")
         if [ "$version_new_bin" == "$version_new" ];then
-            mv -f "v2ray-plugin_$kernel_v2ray_plugin_$arch_v2ray_plugin""$arch_version_v2ray_plugin" $path_install_to/v2ray-plugin
+            mv -f v2ray-plugin_"$kernel_v2ray_plugin"_"$arch_v2ray_plugin""$arch_version_v2ray_plugin" $path_install_to/v2ray-plugin
             chmod +x $path_install_to/v2ray-plugin
         fi
         service shadowsocks-rust_transproxy start > /dev/null 2>&1
