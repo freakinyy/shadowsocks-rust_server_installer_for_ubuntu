@@ -8,6 +8,8 @@ arch_v2ray_plugin="mips"
 kernel_v2ray_plugin="linux"
 arch_version_v2ray_plugin="le_sf"
 
+path_install_to="/usr/bin"
+
 guess_package_manager(){
     local res
     local package_managers="apt opkg"

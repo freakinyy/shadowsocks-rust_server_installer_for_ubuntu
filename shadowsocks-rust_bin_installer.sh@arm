@@ -8,6 +8,8 @@ arch_v2ray_plugin="arm"
 kernel_v2ray_plugin="linux"
 arch_version_v2ray_plugin="7"
 
+path_install_to="/usr/bin"
+
 guess_package_manager(){
     local res
     local package_managers="apt opkg"
