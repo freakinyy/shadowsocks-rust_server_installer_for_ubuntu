@@ -1,12 +1,12 @@
 #!/bin/bash
 
-arch_shadowsocks_rust="x86_64"
+arch_shadowsocks_rust="mipsel"
 kernel_shadowsocks_rust="linux"
-system_shadowsocks_rust="gnu"
+system_shadowsocks_rust="musl"
 
-arch_v2ray_plugin="amd64"
+arch_v2ray_plugin="mips"
 kernel_v2ray_plugin="linux"
-arch_version_v2ray_plugin=""
+arch_version_v2ray_plugin="le_sf"
 
 path_install_to="/usr/bin"
 

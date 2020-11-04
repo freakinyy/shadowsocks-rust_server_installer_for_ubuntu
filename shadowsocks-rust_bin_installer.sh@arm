@@ -24,24 +24,24 @@ guess_package_manager(){
     echo $res
 }
 
-get_version_new(){
+get_version_from_github(){
     local version=$(curl -s https://github.com/shadowsocks/$1/releases/latest | cut -d "\"" -f2 | cut -d "/" -f8 | grep -oE '([0-9]{1,4}\.)*[0-9]{1,4}')
     echo $version
 }
 
-get_version_cur(){
+get_version_from_bin(){
     local version=$($1 --version | sed -n 1p | cut -d " " -f2 | grep -oE '([0-9]{1,4}\.)*[0-9]{1,4}')
     echo $version
 }
 
 install_shadowsocks_rust(){
     local need_update="0"
-    local version_new=$(get_version_new "shadowsocks-rust")
+    local version_new=$(get_version_from_github "shadowsocks-rust")
     local version_cur=""
     local bins="sslocal ssmanager ssserver ssurl"
 	for bin in $bins
 	do
-        version_cur=$(get_version_cur $bin)
+        version_cur=$(get_version_from_bin $bin)
         if [ "$version_new" != "$version_cur" ];then
             need_update="1"
             break
@@ -56,8 +56,11 @@ install_shadowsocks_rust(){
         service shadowsocks-rust_server stop > /dev/null 2>&1
 	    for bin in $bins
         do
-            mv -f $bin $path_install_to/$bin
-            chmod +x $path_install_to/$bin
+            local version_new_bin=$(get_version_from_bin "./$bin")
+            if [ "$version_new_bin" == "$version_new" ];then
+                mv -f $bin $path_install_to/$bin
+                chmod +x $path_install_to/$bin
+            fi
         done
         service shadowsocks-rust_transproxy start > /dev/null 2>&1
         service shadowsocks-rust_server start > /dev/null 2>&1
@@ -67,12 +70,12 @@ install_shadowsocks_rust(){
 
 install_v2ray_plugin(){
     local need_update="0"
-    local version_new=$(get_version_new "v2ray-plugin")
+    local version_new=$(get_version_from_github "v2ray-plugin")
     local version_cur=""
     local bins="v2ray-plugin"
 	for bin in $bins
 	do
-        version_cur=$(get_version_cur $bin)
+        version_cur=$(get_version_from_bin $bin)
         if [ "$version_new" != "$version_cur" ];then
             need_update="1"
             break
@@ -85,8 +88,11 @@ install_v2ray_plugin(){
         tar xvf v2ray-plugin-"$kernel_v2ray_plugin"-"$arch_v2ray_plugin"-v"$version_new".tar.gz
         service shadowsocks-rust_transproxy stop > /dev/null 2>&1
         service shadowsocks-rust_server stop > /dev/null 2>&1
-        mv -f v2ray-plugin_"$kernel_v2ray_plugin"_"$arch_v2ray_plugin""$arch_version_v2ray_plugin" $path_install_to/v2ray-plugin
-        chmod +x $path_install_to/v2ray-plugin
+        local version_new_bin=$(get_version_from_bin "./v2ray-plugin_$kernel_v2ray_plugin_$arch_v2ray_plugin")
+        if [ "$version_new_bin" == "$version_new" ];then
+            mv -f "v2ray-plugin_$kernel_v2ray_plugin_$arch_v2ray_plugin""$arch_version_v2ray_plugin" $path_install_to/v2ray-plugin
+            chmod +x $path_install_to/v2ray-plugin
+        fi
         service shadowsocks-rust_transproxy start > /dev/null 2>&1
         service shadowsocks-rust_server start > /dev/null 2>&1
         rm -rf $tmp_dir
