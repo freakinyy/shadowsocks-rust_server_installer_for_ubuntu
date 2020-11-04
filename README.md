@@ -14,20 +14,22 @@
 1.5 Add a shedule for automatic update for shadowsocks-rust and v2ray-plugin from github releases.
 
 
-2. Install:
+2. Install
 
 `wget https://github.com/freakinyy/shadowsocks-rust_server_installer_for_ubuntu/raw/main/shadowsocks-rust_server_installer_for_ubuntu.sh`
+
 `chmod +x shadowsocks-rust_server_installer_for_ubuntu.sh`
+
 `./shadowsocks-rust_server_installer_for_ubuntu.sh install`
 
 
-3. Uinstall:
+3. Uinstall
 
 `./shadowsocks-rust_server_installer_for_ubuntu.sh uninstall`
 
-4. Usage:
+4. Usage
 
-4.1 Edit config:
+4.1 Edit config
 
 Edit default.json in /etc/init.d/shadowsocks-rust_server, or create one or more .json file(s) in the folder.
 
