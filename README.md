@@ -16,16 +16,14 @@
 
 2. Install:
 
-wget https://github.com/freakinyy/shadowsocks-rust_server_installer_for_ubuntu/raw/main/shadowsocks-rust_server_installer_for_ubuntu.sh
-
-chmod +x shadowsocks-rust_server_installer_for_ubuntu.sh
-
-./shadowsocks-rust_server_installer_for_ubuntu.sh install
+`wget https://github.com/freakinyy/shadowsocks-rust_server_installer_for_ubuntu/raw/main/shadowsocks-rust_server_installer_for_ubuntu.sh`
+`chmod +x shadowsocks-rust_server_installer_for_ubuntu.sh`
+`./shadowsocks-rust_server_installer_for_ubuntu.sh install`
 
 
 3. Uinstall:
 
-./shadowsocks-rust_server_installer_for_ubuntu.sh uninstall
+`./shadowsocks-rust_server_installer_for_ubuntu.sh uninstall`
 
 4. Usage:
 
@@ -35,8 +33,8 @@ Edit default.json in /etc/init.d/shadowsocks-rust_server, or create one or more 
 
 4.2 Service control
 
-service shadowsocks-rust_server start|stop|restart|status
+`service shadowsocks-rust_server start|stop|restart|status`
 
 4.3 Edit update shedule
 
-crontab -e
+`crontab -e`
