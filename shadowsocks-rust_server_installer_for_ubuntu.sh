@@ -163,14 +163,14 @@ Create_Json(){
 	"password":"$your_password",
 	"method":"xchacha20-ietf-poly1305",
 	"timeout":600,
-	"user":"root",
 	"plugin":"/usr/bin/v2ray-plugin",
 	"plugin_opts":"server;host=cloudflare.com",
 	"fast_open":true,
 	"mode":"tcp_and_udp",
-	"nofile": 51200,
 	"udp_timeout": 5,
-	"udp_max_associations": 2048
+	"udp_max_associations": 2048,
+	"user":"root",
+	"nofile": 51200
 }
 EOF
 	echo "Create json path and file Done."
