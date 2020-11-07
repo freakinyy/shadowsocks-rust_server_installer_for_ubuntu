@@ -6,7 +6,7 @@ pid_folder="/var/run/shadowsocks-rust_server"
 log_file="/var/log/shadowsocks-rust_server.log"
 
 do_start() {
-	echo "开启ss-server进程..."  >> $log_file
+	echo "开启ssserver进程..."  >> $log_file
 	[ -d $conf_folder/ ] || return 2
 	json_files=$(ls $conf_folder/ | grep ".json$" )
 	[ -d $pid_folder/ ] && do_stop
@@ -21,7 +21,7 @@ do_start() {
 }
 
 do_stop() {
-	echo "关闭ss-server进程..."  >> $log_file
+	echo "关闭ssserver进程..."  >> $log_file
 	[ -d $pid_folder/ ] || return 2
 	pid_files=$(ls $pid_folder/ | grep ".pid" )
 	[ -z "$pid_files" ] && return 2
