@@ -161,7 +161,7 @@ Create_Json(){
 	"server":"0.0.0.0",
 	"server_port":443,
 	"password":"$your_password",
-	"method":"xchacha20-ietf-poly1305",
+	"method":"chacha20-ietf-poly1305",
 	"timeout":300,
 	"plugin":"/usr/bin/v2ray-plugin",
 	"plugin_opts":"server;host=cloudflare.com",
