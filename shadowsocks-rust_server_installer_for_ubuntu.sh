@@ -158,19 +158,19 @@ Create_Json(){
 	touch /etc/shadowsocks-rust_server/default.json
 	cat >> /etc/shadowsocks-rust_server/default.json <<EOF
 {
-	"server":"0.0.0.0",
+	"server":"::",
 	"server_port":443,
 	"password":"$your_password",
-	"method":"chacha20-ietf-poly1305",
-	"timeout":300,
+	"method":"xchacha20-ietf-poly1305",
+	"timeout":600,
+	"user":"root",
 	"plugin":"/usr/bin/v2ray-plugin",
 	"plugin_opts":"server;host=cloudflare.com",
 	"fast_open":true,
 	"mode":"tcp_and_udp",
+	"nofile": 51200,
 	"udp_timeout": 5,
-	"udp_max_associations": 2048,
-	"user":"root",
-	"nofile": 51200
+	"udp_max_associations": 2048
 }
 EOF
 	echo "Create json path and file Done."
@@ -230,9 +230,7 @@ Add_to_Crontab(){
 	cat >> $TMP_DIR/crontab.bak <<EOF
 #shadowsocks-rust_server modifies start
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
-20 04 * * * apt update && apt upgrade -y && apt dist-upgrade -y && apt autoremove -y && apt autoclean
-40 04 * * * [ -f /var/run/reboot-required ] && reboot
-50 04 * * * shadowsocks-rust_bin_installer.sh update
+00 17 * * 6 shadowsocks-rust_bin_installer.sh install
 #shadowsocks-rust_server modifies end
 EOF
 	crontab $TMP_DIR/crontab.bak
