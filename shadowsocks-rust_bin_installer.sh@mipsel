@@ -102,6 +102,7 @@ install_v2ray_plugin(){
 install(){
 	pm=$(guess_package_manager)
 	$pm install curl -y > /dev/null 2>&1
+	$pm install jq -y > /dev/null 2>&1
 	install_shadowsocks_rust
 	install_v2ray_plugin
 }
