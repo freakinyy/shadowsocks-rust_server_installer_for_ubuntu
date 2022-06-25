@@ -272,8 +272,8 @@ Do_Install(){
 	echo "Start Install Shadowsocks-rust_server..."
 	service shadowsocks-rust_server stop
 	Update_Upgrade_Packages
-	Install_Bin
 	apt install jq -y
+	Install_Bin
 	Install_Rng_tools
 	Install_BBR
 	Optimize_Parameters
