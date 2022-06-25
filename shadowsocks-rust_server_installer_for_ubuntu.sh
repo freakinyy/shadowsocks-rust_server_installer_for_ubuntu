@@ -273,6 +273,7 @@ Do_Install(){
 	service shadowsocks-rust_server stop
 	Update_Upgrade_Packages
 	Install_Bin
+	apt install jq -y
 	Install_Rng_tools
 	Install_BBR
 	Optimize_Parameters
