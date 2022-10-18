@@ -1,5 +1,15 @@
 # shadowsocks-rust_server_installer_for_ubuntu
 
+Requirments:
+
+Ubuntu 20.04 or Later
+
+Ubuntu 16-18 and Debian may support, not tested.
+
+CentOs not surpported
+
+Run from root
+
 
 1. Fetures
 
@@ -40,3 +50,11 @@ Edit default.json in /etc/init.d/shadowsocks-rust_server, or create one or more 
 4.3 Edit update shedule
 
 `crontab -e`
+
+Note:
+
+1."service shadowsocks-rust_server restart" must be run to valid new json config file.
+
+2.Some things installed or added while install won't be removed, such as basic packages, bbr and rng-tools. You can remove them by yourself.
+
+3.Your machine may reboot when install. Just re-run "shadowsocks-rust_server_installer_for_ubuntu.sh install" after reboot.
