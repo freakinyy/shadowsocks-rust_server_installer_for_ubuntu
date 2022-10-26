@@ -50,7 +50,7 @@ Install_Rng_tools(){
 	echo "Install Rng-tools..."
 	apt-get install --no-install-recommends virt-what -y
 	echo "Your Virtualization type is $(virt-what)"
-	if [ "$(virt-what)" != "kvm" && "$(virt-what)" != "hyperv" ];then
+	if [ "$(virt-what)" != "kvm" -a "$(virt-what)" != "hyperv" ];then
 		echo "Rng-tools can not be used."
 		echo "#############################################"
 		return 1
