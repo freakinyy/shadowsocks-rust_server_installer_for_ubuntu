@@ -159,7 +159,7 @@ Create_Json(){
 	cat >> /etc/shadowsocks-rust_server/default.json <<EOF
 {
 	"server":"::",
-	"server_port":1443,
+	"server_port":2443,
 	"password":"$your_password",
 	"method":"chacha20-ietf-poly1305",
 	"timeout":300,
