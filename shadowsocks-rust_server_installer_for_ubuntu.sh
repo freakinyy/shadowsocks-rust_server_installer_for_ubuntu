@@ -154,21 +154,21 @@ Create_Json(){
 		fi
 	fi
 	mkdir -p /etc/shadowsocks-rust_server/
-	your_password=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c128 | sha1sum | cut -d " " -f1)
+	your_password=$(< /dev/urandom tr -dc 'a-zA-Z0-9~!@#$%^&*_-' | head -c32 | base64)
 	touch /etc/shadowsocks-rust_server/default.json
 	cat >> /etc/shadowsocks-rust_server/default.json <<EOF
 {
 	"server":"::",
-	"server_port":2443,
+	"server_port":1443,
 	"password":"$your_password",
-	"method":"chacha20-ietf-poly1305",
-	"timeout":300,
+	"method":"2022-blake3-chacha20-poly1305",
+	"timeout":7200,
 	"plugin":"/usr/bin/v2ray-plugin",
 	"plugin_opts":"server;host=cloudflare.com",
 	"fast_open":true,
 	"mode":"tcp_and_udp",
-	"udp_timeout": 5,
-	"udp_max_associations": 2048,
+	"udp_timeout": 300,
+	"udp_max_associations": 512,
 	"user":"root",
 	"nofile": 51200
 }
