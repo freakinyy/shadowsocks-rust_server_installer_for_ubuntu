@@ -170,7 +170,11 @@ Create_Json(){
 	"udp_timeout": 300,
 	"udp_max_associations": 512,
 	"user":"root",
-	"nofile": 51200
+	"nofile": 51200,
+    "runtime": {
+        "mode": "multi_thread",
+        "worker_count": 4
+    }
 }
 EOF
 	echo "Create json path and file Done."
