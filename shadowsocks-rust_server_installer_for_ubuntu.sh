@@ -173,7 +173,7 @@ Create_Json(){
 	"nofile": 51200,
     "runtime": {
         "mode": "multi_thread",
-        "worker_count": 4
+        "worker_count": 2
     }
 }
 EOF
