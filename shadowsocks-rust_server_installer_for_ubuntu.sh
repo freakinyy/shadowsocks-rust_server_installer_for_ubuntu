@@ -142,7 +142,7 @@ Optimize_Parameters(){
 
 Create_Json(){
 	echo "#############################################"
-	echo "Create json path and file..."
+	echo "Create json path and files..."
 	if [ -d /etc/shadowsocks-rust_server/ ];then
 		json_files=$(ls /etc/shadowsocks-rust_server/ | grep ".json$" )
 		if [ -n "$json_files" ];then
@@ -155,18 +155,18 @@ Create_Json(){
 	fi
 	mkdir -p /etc/shadowsocks-rust_server/
 	your_password=$(< /dev/urandom tr -dc 'a-zA-Z0-9~!@#$%^&*_-' | head -c32 | base64)
-	touch /etc/shadowsocks-rust_server/default.json
-	cat >> /etc/shadowsocks-rust_server/default.json <<EOF
+	touch /etc/shadowsocks-rust_server/default_tcp.json
+	cat >> /etc/shadowsocks-rust_server/default_tcp.json <<EOF
 {
 	"server":"::",
-	"server_port":1443,
+	"server_port":443,
 	"password":"$your_password",
 	"method":"2022-blake3-chacha20-poly1305",
 	"timeout":7200,
 	"plugin":"/usr/bin/v2ray-plugin",
 	"plugin_opts":"server;host=cloudflare.com",
 	"fast_open":true,
-	"mode":"tcp_and_udp",
+	"mode":"tcp_only",
 	"udp_timeout": 300,
 	"udp_max_associations": 512,
 	"user":"root",
@@ -177,7 +177,29 @@ Create_Json(){
     }
 }
 EOF
-	echo "Create json path and file Done."
+	touch /etc/shadowsocks-rust_server/default_udp.json
+	cat >> /etc/shadowsocks-rust_server/default_udp.json <<EOF
+{
+	"server":"::",
+	"server_port":3478,
+	"password":"$your_password",
+	"method":"2022-blake3-chacha20-poly1305",
+	"timeout":7200,
+	"plugin":"",
+	"plugin_opts":"",
+	"fast_open":true,
+	"mode":"udp_only",
+	"udp_timeout": 300,
+	"udp_max_associations": 512,
+	"user":"root",
+	"nofile": 51200,
+    "runtime": {
+        "mode": "multi_thread",
+        "worker_count": 2
+    }
+}
+EOF
+	echo "Create json path and files Done."
 	echo "#############################################"
 }
 
@@ -260,9 +282,9 @@ Remove_from_Crontab(){
 
 Show_Json(){
 	echo "#############################################"
-	echo "Your json file is located in: /etc/shadowsocks-rust_server/"
+	echo "Your configs are located in: /etc/shadowsocks-rust_server/"
 	json_files=$(ls /etc/shadowsocks-rust_server/ | grep ".json$" )
-	echo "Here is your config:"
+	echo "Here are your configs:"
 	for json_file in $json_files; do
 		echo "###########################"
 		echo "$json_file:"
