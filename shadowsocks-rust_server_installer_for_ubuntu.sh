@@ -154,46 +154,49 @@ Create_Json(){
 		fi
 	fi
 	mkdir -p /etc/shadowsocks-rust_server/
-	your_password=$(< /dev/urandom tr -dc 'a-zA-Z0-9~!@#$%^&*_-' | head -c32 | base64)
+	your_password=$(ssservice genkey -m "2022-blake3-chacha20-poly1305")
 	touch /etc/shadowsocks-rust_server/default_tcp.json
 	cat >> /etc/shadowsocks-rust_server/default_tcp.json <<EOF
 {
 	"server":"::",
 	"server_port":443,
-	"password":"$your_password",
 	"method":"2022-blake3-chacha20-poly1305",
-	"timeout":7200,
+	"password":"$your_password",
 	"plugin":"/usr/bin/v2ray-plugin",
 	"plugin_opts":"server;host=cloudflare.com",
-	"fast_open":true,
 	"mode":"tcp_only",
+	"timeout":7200,
 	"udp_timeout": 300,
-	"udp_max_associations": 512,
+	"udp_max_associations": 2048,
+	"fast_open":true,
 	"user":"root",
-	"nofile": 102400,
-    "runtime": {
+	"nofile": 40960,
+    "runtime":
+	{
         "mode": "multi_thread",
         "worker_count": 2
     }
 }
 EOF
+	your_password=$(ssservice genkey -m "2022-blake3-chacha20-poly1305")
 	touch /etc/shadowsocks-rust_server/default_udp.json
 	cat >> /etc/shadowsocks-rust_server/default_udp.json <<EOF
 {
 	"server":"::",
-	"server_port":3478,
-	"password":"$your_password",
+	"server_port":443,
 	"method":"2022-blake3-chacha20-poly1305",
-	"timeout":7200,
+	"password":"$your_password",
 	"plugin":"",
 	"plugin_opts":"",
-	"fast_open":true,
 	"mode":"udp_only",
+	"timeout":7200,
 	"udp_timeout": 300,
-	"udp_max_associations": 512,
+	"udp_max_associations": 2048,
+	"fast_open":true,
 	"user":"root",
-	"nofile": 51200,
-    "runtime": {
+	"nofile": 40960,
+    "runtime":
+	{
         "mode": "multi_thread",
         "worker_count": 2
     }
